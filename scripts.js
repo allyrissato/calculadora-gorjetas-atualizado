@@ -1,21 +1,27 @@
 function calculateTip(event) {
     event.preventDefault();
     
-    let bill = document.getElementById('bill').value;
+    let bill = document.getElementById('bill').value.trim();
     let serviceQual = document.getElementById('serviceQual').value;
-    let numOfPeople = document.getElementById('people').value;
+    let numOfPeople = document.getElementById('people').value.trim();
 
     // Validação dos campos
-    if (bill === '' || bill <= 0 || serviceQual === '0') {
-        alert("Por favor, preencha todos os valores corretamente");
+    if (!bill || bill <= 0) {
+        showError("Por favor, insira um valor válido para a conta");
+        return;
+    }
+
+    if (serviceQual === '0') {
+        showError("Por favor, selecione a qualidade do serviço");
         return;
     }
 
     // Converte para números
     numOfPeople = parseInt(numOfPeople);
     
-    if (numOfPeople <= 0) {
-        numOfPeople = 1;
+    if (isNaN(numOfPeople) || numOfPeople <= 0) {
+        showError("Por favor, insira um número válido de pessoas");
+        return;
     }
 
     // Calcula a gorjeta total
@@ -27,6 +33,15 @@ function calculateTip(event) {
     // Formata para 2 casas decimais
     tipPerPerson = tipPerPerson.toFixed(2);
     totalTip = totalTip.toFixed(2);
+    
+    // Armazena os valores para exportação
+    window.lastCalculation = {
+        bill: parseFloat(bill).toFixed(2),
+        serviceQual: serviceQual,
+        numOfPeople: numOfPeople,
+        tipPerPerson: tipPerPerson,
+        totalTip: totalTip
+    };
     
     // Atualiza a exibição
     document.getElementById('tip').innerHTML = tipPerPerson;
@@ -40,20 +55,32 @@ function calculateTip(event) {
     }
     
     document.getElementById('totaltip').style.display = "block";
+    showSuccess("Gorjeta calculada com sucesso!");
+}
+
+function showError(message) {
+    alert("❌ " + message);
+}
+
+function showSuccess(message) {
+    // Feedback visual (comentado para não interromper a experiência)
+    console.log("✅ " + message);
+}
+
+function clearForm() {
+    document.getElementById('tipsForm').reset();
+    document.getElementById('totaltip').style.display = "none";
+    document.getElementById('bill').focus();
 }
 
 function exportToExcel() {
-    let bill = document.getElementById('bill').value;
-    let serviceQual = document.getElementById('serviceQual').value;
-    let numOfPeople = document.getElementById('people').value;
-    let tipPerPerson = document.getElementById('tip').innerHTML;
-    let totalTip = document.getElementById('totalTip').innerHTML;
-
     // Verifica se o resultado foi calculado
-    if (document.getElementById('totaltip').style.display === 'none') {
-        alert("Por favor, calcule a gorjeta primeiro!");
+    if (!window.lastCalculation) {
+        showError("Por favor, calcule a gorjeta primeiro!");
         return;
     }
+
+    let { bill, serviceQual, numOfPeople, tipPerPerson, totalTip } = window.lastCalculation;
 
     // Obtém a descrição da qualidade do serviço
     let serviceOptions = {
@@ -70,7 +97,7 @@ function exportToExcel() {
         ['CALCULADORA DE GORJETAS', ''],
         ['', ''],
         ['DADOS DA CONTA', ''],
-        ['Valor da Conta', 'R$ ' + parseFloat(bill).toFixed(2)],
+        ['Valor da Conta', 'R$ ' + bill],
         ['Qualidade do Serviço', serviceDesc],
         ['Número de Pessoas', numOfPeople],
         ['', ''],
@@ -90,33 +117,38 @@ function exportToExcel() {
         { wch: 20 }
     ];
 
-    // Estilo básico para as células (XLSX tem limitações em estilos)
-    // Vamos melhorar a formatação manualmente
-    let cellFormat = {
-        font: { bold: true },
-        fill: { fgColor: { rgb: "FFD966" } }
-    };
-
     // Cria um novo workbook
     let workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Gorjeta");
 
     // Gera o nome do arquivo com data/hora
     let fileName = 'Gorjeta_' + new Date().toISOString().split('T')[0] + '_' + 
-                   new Date().getHours() + '-' + 
+                   String(new Date().getHours()).padStart(2, '0') + '-' + 
                    String(new Date().getMinutes()).padStart(2, '0') + '.xlsx';
 
     // Faz o download
     XLSX.writeFile(workbook, fileName);
     
-    alert("Arquivo exportado com sucesso!");
+    showSuccess("Arquivo exportado com sucesso!");
 }
 
 // Esconde o resultado inicialmente
 document.getElementById("totaltip").style.display = "none";
 
-// Adiciona o listener de submit ao formulário
-document.getElementById('tipsForm').addEventListener('submit', calculateTip);
+// Aguarda o carregamento completo do DOM
+document.addEventListener('DOMContentLoaded', function() {
+    // Adiciona o listener de submit ao formulário
+    document.getElementById('tipsForm').addEventListener('submit', calculateTip);
 
-// Adiciona o listener do botão de exportação
-document.getElementById('exportBtn').addEventListener('click', exportToExcel);
+    // Adiciona o listener do botão de exportação
+    document.getElementById('exportBtn').addEventListener('click', exportToExcel);
+    
+    // Adiciona o listener do botão de limpar
+    document.getElementById('clearBtn').addEventListener('click', clearForm);
+    
+    // Foca no primeiro campo ao carregar
+    document.getElementById('bill').focus();
+});
+
+// Variável global para armazenar o último cálculo
+window.lastCalculation = null;
