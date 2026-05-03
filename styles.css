@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|PT+Mono');
+
+:root{
+    --primary-color: lightcoral;
+    --secondary-color: DimGrey;
+    --tertiary-color: Gainsboro;
+
+}
+body {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF8E8E 100%);
+    font-size: 15px;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    width: 400px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    background: var(--primary-color);
+    color: white;
+    padding: 30px 20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.tipsForm {
+    padding: 30px 25px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label p {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.form-group p {
+    margin: 0;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-wrapper::before {
+    content: '';
+    width: 20px;
+}
+
+.formInput {
+    flex: 1;
+    background: var(--tertiary-color);
+    border: 2px solid #E8E8E8;
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.formInput:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
+    background: white;
+}
+
+.formSelect {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 2px solid #E8E8E8;
+    border-radius: 8px;
+    background: var(--tertiary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.formSelect:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
+    background: white;
+}
+
+.formSelect option {
+    padding: 10px;
+    color: var(--secondary-color);
+}
+
+.formSubmit {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.formSubmit:hover {
+    background: #FF5252;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+}
+
+.formSubmit:active {
+    transform: translateY(0);
+}
+
+#totaltip {
+    display: none;
+    padding: 25px;
+    background: var(--tertiary-color);
+    border-top: 3px solid var(--primary-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.result-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.result-item {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.result-item p:first-child {
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.result-value {
+    color: var(--accent-color);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#totalBox {
+    border-left-color: var(--primary-color);
+}
+
+#totalBox .result-value {
+    color: var(--primary-color);
+}
+
+.exportBtn {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 15px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+    text-transform: uppercase;
+}
+
+.exportBtn:hover {
+    background: #00A085;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 184, 148, 0.4);
+}
+
+.exportBtn:active {
+    transform: translateY(0);
+}
