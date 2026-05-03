@@ -72,7 +72,7 @@ A aplicação possui:
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Allyrissato**
+Desenvolvido por **Alianny Rissato**
 
 ## 📄 Licença
 
@@ -80,4 +80,3 @@ Este projeto está aberto para uso livre e educacional.
 
 ---
 
-**Dúvidas ou sugestões?** Abra uma issue ou entre em contato!
