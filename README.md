@@ -59,6 +59,24 @@ A aplicação possui:
 - Validação de formulário com mensagens de erro
 - Interface intuitiva e fácil de usar
 
+
+# 🖥️ Interface da Aplicação
+
+![Visual](images/visual.png)
+
+---
+
+# 📊 Resultado do Cálculo
+
+![Resultado](images/resultado.png)
+
+---
+
+# ⭐ Avaliação do Sistema
+
+![Avaliação](images/avaliacao.png)
+
+
 ## 📝 Exemplo de Uso
 
 **Cenário:** Você está em um restaurante com 2 amigos, a conta ficou R$ 150,00 e o serviço foi bom (20%).
