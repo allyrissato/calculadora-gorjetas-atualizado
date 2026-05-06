@@ -70,9 +70,9 @@ A aplicação possui:
 
 **Resultado:** Cada pessoa pagará **R$ 10,00** de gorjeta
 
-## 👨‍💻 Autor
+## 👩‍💻 Desenvolvedora
 
-Desenvolvido por **Allyrissato**
+**Alianny Rissato**
 
 ## 📄 Licença
 
@@ -80,4 +80,3 @@ Este projeto está aberto para uso livre e educacional.
 
 ---
 
-**Dúvidas ou sugestões?** Abra uma issue ou entre em contato!
