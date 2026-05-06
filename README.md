@@ -70,9 +70,9 @@ A aplicação possui:
 
 **Resultado:** Cada pessoa pagará **R$ 10,00** de gorjeta
 
-## 👨‍💻 Autor
+## 👩‍💻 Desenvolvedora
 
-Desenvolvido por **Alianny Rissato**
+**Alianny Rissato**
 
 ## 📄 Licença
 
