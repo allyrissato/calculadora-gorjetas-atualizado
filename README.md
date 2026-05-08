@@ -90,7 +90,7 @@ A aplicação possui:
 
 ## 👩‍💻 Desenvolvedora
 
-**Alianny Rissato**
+ - Alianny Rissato
 
 ## 📄 Licença
 
